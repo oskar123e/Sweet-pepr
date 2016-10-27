@@ -1,23 +1,33 @@
 import os
+import time
 import wget
+from zipfile import *
 
-
-
-
+global home
 home = os.path.expanduser('~')
 
 
 def installer():
-    checkDir = os.path.isdir('Sweet-pepr')
+    checkDir = bool(os.path.isdir('/Sweet-pepr'))
 
     if checkDir == True:
-        try:
-            os.mkdir('/sweet-peper')
-        except:
-            pass
+        os.rmdir(home + '/Sweet-pepr')
+        os.mkdir(home + '/Sweet-pepr')
+    else:
+        pass
 
-        else:
-            os.mkdir(home + '/Sweet-pepr')
-    wget.download('https://github.com/oskar123e/icons/archive/master.zip', )
-
+    print('Downloading Packages from Github')
+    wget.download('https://github.com/oskar123e/icons/archive/master.zip', home + '/master.zip')
+    time.sleep(5)
+    zipfile = (home + '/master.zip')
+    print('extracting files,')
+    zip_archive = ZipFile(zipfile)
+    zip_archive.extractall(home + '/Sweet-pepr')
+    zip_archive.close()
+    time.sleep(5)
+    print('cleaning up')
+    os.remove(home + '/Sweet-pepr/icons-master/main/install.py')
+    os.system('rm -r ~/Sweet-pepr/icons-master/.idea')
+    os.remove(home + '/Sweet-pepr/icons-master/tab.svg')
+    print('installer finished')
 installer()
