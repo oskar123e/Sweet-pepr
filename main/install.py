@@ -1,5 +1,8 @@
 import os
-import urllib
+import wget
+
+
+
 
 home = os.path.expanduser('~')
 
@@ -15,7 +18,6 @@ def installer():
 
         else:
             os.mkdir(home + '/Sweet-pepr')
-    urllib.urlretrieve("http://", ".")
-
+    wget.download('https://github.com/oskar123e/icons/archive/master.zip', )
 
 installer()
