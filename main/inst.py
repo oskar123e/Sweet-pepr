@@ -1,35 +1,42 @@
 import os
 import time
-import wget
 from zipfile import *
 
-global home
-home = os.path.expanduser('~')
+python = os.path.isfile('/usr/bin/python3')
+if python:
+    try:
+        os.system('pip3 install wget')
+    finally:
+        import wget
+
+# UNIX ~ shortcut
+global HOMe
+
+HOMe = os.path.expanduser('~')
 
 
 def installer():
-    checkDir = bool(os.path.isdir('/Sweet-pepr'))
+    checkdir = bool(os.path.isdir('/Sweet-pepr'))
 
-    if checkDir == True:
-        os.rmdir(home + '/Sweet-pepr')
-        os.mkdir(home + '/Sweet-pepr')
+    if checkdir:
+        os.rmdir(HOMe + '/Sweet-pepr')
+        os.mkdir(HOMe + '/Sweet-pepr')
     else:
         pass
 
     print('Downloading Packages from Github')
-    wget.download('https://github.com/oskar123e/Sweet-pepr/archive/master.zip', home + '/master.zip')
+    wget.download('https://github.com/oskar123e/Sweet-pepr/archive/master.zip', HOMe + '/master.zip')
     time.sleep(2)
-    zipfile = (home + '/master.zip')
+    zipfile = (HOMe + '/master.zip')
     print('extracting files,')
     zip_archive = ZipFile(zipfile)
-    zip_archive.extractall(home + '/Sweet-pepr')
+    zip_archive.extractall(HOMe + '/Sweet-pepr')
     zip_archive.close()
     time.sleep(2)
     print('cleaning up')
-    os.remove(home + '/Sweet-pepr/icons-master/main/inst.py')
-    os.system('rm -r ~/Sweet-pepr/icons-master/.idea')
-    os.remove(home + '/Sweet-pepr/icons-master/tab.svg')
-    print('installer finished')
+    os.remove(HOMe + '/Sweet-pepr/Sweet-pepr-master/main/inst.py')
+    os.system('rm -r ~/Sweet-pepr/Sweet-pepr-master/.idea')
 
+    print('installer finished')
 
 installer()
