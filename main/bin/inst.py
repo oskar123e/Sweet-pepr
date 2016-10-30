@@ -2,15 +2,10 @@ import os
 import time
 from zipfile import *
 
-python = os.path.isfile('/usr/bin/python3')
-if python:
-    try:
-        os.system('pip3 install wget')
-    finally:
-        import wget
+import wget
 
 # UNIX ~ shortcut
-global HOMe
+
 
 HOMe = os.path.expanduser('~')
 
@@ -30,12 +25,11 @@ def installer():
     zipfile = (HOMe + '/master.zip')
     print('extracting files,')
     zip_archive = ZipFile(zipfile)
-    zip_archive.extractall(HOMe + '/Sweet-pepr')
+    zip_archive.extractall(HOMe + '/.Sweet-pepr')
     zip_archive.close()
     time.sleep(2)
     print('cleaning up')
-    os.remove(HOMe + '/Sweet-pepr/Sweet-pepr-master/main/inst.py')
-    os.system('rm -r ~/Sweet-pepr/Sweet-pepr-master/.idea')
+    os.system('rm -r ~/.Sweet-pepr/Sweet-pepr-master/.idea')
 
     print('installer finished')
 
